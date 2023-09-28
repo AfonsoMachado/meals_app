@@ -20,7 +20,10 @@ class CategoryItem extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           )),
-      child: Text(category.title),
+      child: Text(
+        category.title,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
     );
   }
 }
