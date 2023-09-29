@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/screens/categories_meals_screen.dart';
 import 'package:meals_app/screens/categories_screen.dart';
+import 'package:meals_app/screens/meal_detail_screen.dart';
 import 'package:meals_app/utils/app_routes.dart';
 
 void main() {
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         // Rota inicial padrão
         AppRoutes.home: (ctx) => const CategoriesScreen(),
         AppRoutes.categoriesMeals: (ctx) => const CategoriesMealsScreen(),
+        AppRoutes.mealDetail: (ctx) => const MealDetailScreen(),
       },
     );
   }
