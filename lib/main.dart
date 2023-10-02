@@ -20,6 +20,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  // Variável global das configurações de filtro
+  Settings settings = Settings();
   List<Meal> _availableMeals = dummyMeals;
 
   // Aplicando o filtro nos dados
@@ -27,6 +29,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       // Realiza a filtragem das refeições todas as vezes que houver uma alteração
       _availableMeals = dummyMeals.where((meal) {
+        this.settings = settings;
         final filterGluten = settings.isGlutenFree && !meal.isGlutenFree;
         final filterLactose = settings.isLactoseFree && !meal.isLactoseFree;
         final filterVegan = settings.isVegan && !meal.isVegan;
@@ -63,7 +66,7 @@ class _MyAppState extends State<MyApp> {
         AppRoutes.categoriesMeals: (ctx) =>
             CategoriesMealsScreen(_availableMeals),
         AppRoutes.mealDetail: (ctx) => const MealDetailScreen(),
-        AppRoutes.settings: (ctx) => SettingsScreen(_filterMeals),
+        AppRoutes.settings: (ctx) => SettingsScreen(settings, _filterMeals),
       },
     );
   }
