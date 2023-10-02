@@ -23,6 +23,7 @@ class _MyAppState extends State<MyApp> {
   // Variável global das configurações de filtro
   Settings settings = Settings();
   List<Meal> _availableMeals = dummyMeals;
+  List<Meal> _favoriteMeals = [];
 
   // Aplicando o filtro nos dados
   void _filterMeals(Settings settings) {
@@ -40,6 +41,19 @@ class _MyAppState extends State<MyApp> {
             !filterVegetarian;
       }).toList();
     });
+  }
+
+  // Adicionando ou removendo refeição favorita
+  void _toggleFavorite(Meal meal) {
+    setState(() {
+      _favoriteMeals.contains(meal)
+          ? _favoriteMeals.remove(meal)
+          : _favoriteMeals.add(meal);
+    });
+  }
+
+  bool _isFavorite(Meal meal) {
+    return _favoriteMeals.contains(meal);
   }
 
   @override
@@ -62,10 +76,11 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         // Rota inicial padrão
-        AppRoutes.home: (ctx) => const TabsScreen(),
+        AppRoutes.home: (ctx) => TabsScreen(_favoriteMeals),
         AppRoutes.categoriesMeals: (ctx) =>
             CategoriesMealsScreen(_availableMeals),
-        AppRoutes.mealDetail: (ctx) => const MealDetailScreen(),
+        AppRoutes.mealDetail: (ctx) =>
+            MealDetailScreen(_toggleFavorite, _isFavorite),
         AppRoutes.settings: (ctx) => SettingsScreen(settings, _filterMeals),
       },
     );

@@ -29,6 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       value: value,
       onChanged: (value) {
         onChanged(value);
+        // widget.[...] acessa métodos do StatefulWidget
         widget.onSettingsChange(settings);
       },
       title: Text(title),
